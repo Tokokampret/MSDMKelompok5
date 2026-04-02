@@ -1,14 +1,14 @@
 // Mock user data
 const mockUser = {
   name: "CRISTIANO RONALDO",
-  avatar: "/Profile.png", // ✅ FIXED
+  avatar: "/profile.png", // ✅ FIXED
   initials: "CR",
 }
 
 // Mock profile data
 const mockProfile = {
   name: "CRISTIANO RONALDO",
-  avatar: "/Profile.png", // ✅ FIXED
+  avatar: "/profile.png", // ✅ FIXED
   initials: "CR",
   email: "CRISTIANALDOWIDJAJA@GMAIL.COM",
   phone: "08986081533",
