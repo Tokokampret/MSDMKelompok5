@@ -116,7 +116,7 @@ export function ProfileSection({
           <div className="flex flex-col md:flex-row gap-8 items-start">
             <div className="relative group">
               <Avatar className="w-32 h-32 md:w-40 md:h-40 border-4 border-gray-100 shadow-lg">
-                <AvatarImage src={profile.avatar} alt={profile.name} />
+                <AvatarImage src={profile.avatar || "/images/profile.png"} alt={profile.name} className="object-cover object-top" />
                 <AvatarFallback className="bg-[#00609D] text-white text-3xl">
                   {profile.initials}
                 </AvatarFallback>
