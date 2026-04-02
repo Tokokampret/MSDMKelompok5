@@ -1,5 +1,5 @@
 "use client"
-
+import Image from "next/image"
 import * as React from "react"
 import Link from "next/link"
 import { 
@@ -62,9 +62,15 @@ export function Navbar({ user, onNavigate, onLogout, activeSection }: NavbarProp
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-3 flex-shrink-0">
-              <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
-                <span className="text-[#00609D] font-bold text-lg">EI</span>
-              </div>
+              <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center overflow-hidden">
+  <Image 
+    src="/Logo.jpeg" 
+    alt="Logo" 
+    width={40} 
+    height={40} 
+    className="object-contain"
+  />
+</div>
               <span className="font-bold text-xl hidden sm:block">Examine Industry</span>
             </Link>
 
