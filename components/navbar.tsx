@@ -64,7 +64,7 @@ export function Navbar({ user, onNavigate, onLogout, activeSection }: NavbarProp
             <Link href="/" className="flex items-center gap-3 flex-shrink-0">
               <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center overflow-hidden">
   <Image 
-    src="/Logo.jpeg" 
+    src="/Logo.png" 
     alt="Logo" 
     width={40} 
     height={40} 
