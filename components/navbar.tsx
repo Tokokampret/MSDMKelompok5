@@ -120,7 +120,7 @@ export function Navbar({ user, onNavigate, onLogout, activeSection }: NavbarProp
                         className="flex items-center gap-2 text-white hover:bg-white/10 px-2"
                       >
                         <Avatar className="w-8 h-8 border-2 border-white/30">
-                          <AvatarImage src={user.avatar || "/images/profile.png"} alt={user.name} />
+                          <AvatarImage src={user.avatar || "/images/profile.png"} alt={user.name} className="object-cover object-top" />
                           <AvatarFallback className="bg-[#0078c2] text-white text-xs">
                             {user.initials}
                           </AvatarFallback>
