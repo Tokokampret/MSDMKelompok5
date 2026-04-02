@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import Image from "next/image"
 import { Mail, Search } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
@@ -12,8 +13,14 @@ export function Footer() {
           {/* Logo and Description */}
           <div className="md:col-span-1">
             <Link href="/" className="flex items-center gap-3 mb-4">
-              <div className="w-12 h-12 bg-[#00609D] rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-xl">EI</span>
+              <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center overflow-hidden">
+                <Image 
+                  src="/images/logo.jpg" 
+                  alt="Examine Industry Logo" 
+                  width={48} 
+                  height={48} 
+                  className="object-contain"
+                />
               </div>
               <span className="font-bold text-xl text-[#00609D]">Examine Industry</span>
             </Link>

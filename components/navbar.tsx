@@ -2,6 +2,7 @@
 
 import * as React from "react"
 import Link from "next/link"
+import Image from "next/image"
 import { 
   Home, 
   Mail, 
@@ -62,8 +63,14 @@ export function Navbar({ user, onNavigate, onLogout, activeSection }: NavbarProp
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-3 flex-shrink-0">
-              <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
-                <span className="text-[#00609D] font-bold text-lg">EI</span>
+              <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center overflow-hidden">
+                <Image 
+                  src="/images/logo.jpg" 
+                  alt="Examine Industry Logo" 
+                  width={40} 
+                  height={40} 
+                  className="object-contain"
+                />
               </div>
               <span className="font-bold text-xl hidden sm:block">Examine Industry</span>
             </Link>
@@ -113,7 +120,7 @@ export function Navbar({ user, onNavigate, onLogout, activeSection }: NavbarProp
                         className="flex items-center gap-2 text-white hover:bg-white/10 px-2"
                       >
                         <Avatar className="w-8 h-8 border-2 border-white/30">
-                          <AvatarImage src={user.avatar} alt={user.name} />
+                          <AvatarImage src={user.avatar || "/images/profile.png"} alt={user.name} />
                           <AvatarFallback className="bg-[#0078c2] text-white text-xs">
                             {user.initials}
                           </AvatarFallback>
