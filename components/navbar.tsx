@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import Image from "next/image"
 import Link from "next/link"
 import Image from "next/image"
 import { 
@@ -14,6 +15,7 @@ import {
   Menu,
   X
 } from "lucide-react"
+
 import { Button } from "@/components/ui/button"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import {
@@ -61,6 +63,7 @@ export function Navbar({ user, onNavigate, onLogout, activeSection }: NavbarProp
       <nav className="bg-[#00609D] text-white sticky top-0 z-50 shadow-lg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
+
             {/* Logo */}
             <Link href="/" className="flex items-center gap-3 flex-shrink-0">
               <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center overflow-hidden">
@@ -102,17 +105,18 @@ export function Navbar({ user, onNavigate, onLogout, activeSection }: NavbarProp
             <div className="flex items-center gap-3">
               {user ? (
                 <>
+                  {/* Message Icon */}
                   <Button 
                     variant="ghost" 
                     size="icon"
                     className="text-white hover:bg-white/10 relative"
-                    aria-label="Messages"
                     onClick={() => onNavigate?.("pesan")}
                   >
                     <Mail className="w-5 h-5" />
                     <span className="absolute top-1 right-1 w-2 h-2 bg-[#F68B1F] rounded-full" />
                   </Button>
 
+                  {/* Profile Dropdown */}
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                       <Button 
@@ -122,41 +126,39 @@ export function Navbar({ user, onNavigate, onLogout, activeSection }: NavbarProp
                         <Avatar className="w-8 h-8 border-2 border-white/30">
                           <AvatarImage src={user.avatar || "/images/profile.png"} alt={user.name} className="object-cover object-top" />
                           <AvatarFallback className="bg-[#0078c2] text-white text-xs">
-                            {user.initials}
+                            {user?.initials}
                           </AvatarFallback>
                         </Avatar>
+
                         <span className="hidden sm:block font-medium text-sm max-w-[150px] truncate">
                           {user.name}
                         </span>
+
                         <ChevronDown className="w-4 h-4" />
                       </Button>
                     </DropdownMenuTrigger>
+
                     <DropdownMenuContent align="end" className="w-56">
-                      <DropdownMenuItem 
-                        onClick={() => onNavigate?.("profil")}
-                        className="cursor-pointer"
-                      >
+                      <DropdownMenuItem onClick={() => onNavigate?.("profil")}>
                         <User className="w-4 h-4 mr-2 text-[#00609D]" />
                         Profil Saya
                       </DropdownMenuItem>
-                      <DropdownMenuItem 
-                        onClick={() => onNavigate?.("riwayat")}
-                        className="cursor-pointer"
-                      >
+
+                      <DropdownMenuItem onClick={() => onNavigate?.("riwayat")}>
                         <Briefcase className="w-4 h-4 mr-2 text-[#00609D]" />
                         Riwayat Lamaran
                       </DropdownMenuItem>
-                      <DropdownMenuItem 
-                        onClick={() => onNavigate?.("reset-password")}
-                        className="cursor-pointer"
-                      >
+
+                      <DropdownMenuItem onClick={() => onNavigate?.("reset-password")}>
                         <Settings className="w-4 h-4 mr-2 text-[#00609D]" />
                         Pengaturan Kata Sandi
                       </DropdownMenuItem>
+
                       <DropdownMenuSeparator />
+
                       <DropdownMenuItem 
                         onClick={onLogout}
-                        className="cursor-pointer text-red-600 focus:text-red-600"
+                        className="text-red-600 focus:text-red-600"
                       >
                         <LogOut className="w-4 h-4 mr-2" />
                         Keluar
@@ -179,7 +181,6 @@ export function Navbar({ user, onNavigate, onLogout, activeSection }: NavbarProp
                 size="icon"
                 className="md:hidden text-white hover:bg-white/10"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                aria-label="Toggle menu"
               >
                 {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
               </Button>

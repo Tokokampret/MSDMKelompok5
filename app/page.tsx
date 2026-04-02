@@ -1,4 +1,3 @@
-"use client"
 
 import * as React from "react"
 import { Navbar } from "@/components/navbar"
@@ -17,14 +16,14 @@ import { cn } from "@/lib/utils"
 // Mock user data
 const mockUser = {
   name: "CRISTIANO RONALDO",
-  avatar: "",
+  avatar: "/profile.png", // ✅ FIXED
   initials: "CR",
 }
 
 // Mock profile data
 const mockProfile = {
   name: "CRISTIANO RONALDO",
-  avatar: "",
+  avatar: "/profile.png", // ✅ FIXED
   initials: "CR",
   email: "CRISTIANALDOWIDJAJA@GMAIL.COM",
   phone: "08986081533",
@@ -35,7 +34,6 @@ const mockProfile = {
   religion: "KATOLIK",
   maritalStatus: "LAJANG",
   idNumber: "6171052805050007",
-  // Extended address info
   lastEducation: "DIPLOMA 4/STRATA 1",
   address: "JL. PANGLIMA AIM",
   province: "KALIMANTAN BARAT",
