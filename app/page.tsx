@@ -7,6 +7,7 @@ import { ProfileSection } from "@/components/profile-section"
 import { ApplicationHistory, ApplicationDetailView } from "@/components/application-history"
 import { MessagesSection, mockMessages } from "@/components/messages-section"
 import { CareerSection, mockJobs } from "@/components/career-section"
+import { LoginSection, ResetPasswordSection } from "@/components/auth-section"
 import { Footer } from "@/components/footer"
 import { FloatingCTA } from "@/components/floating-cta"
 import { Button } from "@/components/ui/button"
@@ -107,8 +108,8 @@ const mockSkills = [
 const mockSocialMedia = {
   instagram: "nnosferatu",
   facebook: "https://www.facebook.com/cristianaldowidjaja",
-  x: "",
-  linkedin: "",
+  x: "@cristianoronaldo",
+  linkedin: "https://www.linkedin.com/in/cristiano-ronaldo",
 }
 
 // Mock documents data
@@ -189,17 +190,22 @@ const mockApplicationDetail = {
   ],
 }
 
-type ViewType = "profil" | "riwayat" | "detail-riwayat" | "pesan" | "karir"
+type ViewType = "profil" | "riwayat" | "detail-riwayat" | "pesan" | "karir" | "login" | "reset-password"
 
 export default function RecruitmentPortal() {
   const [currentView, setCurrentView] = React.useState<ViewType>("profil")
   const [selectedApplicationId, setSelectedApplicationId] = React.useState<string | null>(null)
 
   const handleNavigate = (section: string) => {
-    if (section === "profil" || section === "riwayat" || section === "pesan" || section === "karir") {
+    if (section === "profil" || section === "riwayat" || section === "pesan" || section === "karir" || section === "login" || section === "reset-password") {
       setCurrentView(section)
       setSelectedApplicationId(null)
     }
+  }
+
+  const handleLogout = () => {
+    setCurrentView("login")
+    setSelectedApplicationId(null)
   }
 
   const handleViewDetail = (id: string) => {
@@ -213,7 +219,9 @@ export default function RecruitmentPortal() {
       setSelectedApplicationId(null)
     } else if (currentView === "karir") {
       setCurrentView("profil")
-    } else if (currentView !== "profil") {
+    } else if (currentView === "reset-password") {
+      setCurrentView("login")
+    } else if (currentView !== "profil" && currentView !== "login") {
       setCurrentView("profil")
     }
   }
@@ -230,6 +238,10 @@ export default function RecruitmentPortal() {
         return "Pesan"
       case "karir":
         return "Karir"
+      case "login":
+        return "Masuk"
+      case "reset-password":
+        return "Pengaturan Kata Sandi"
       default:
         return "Profil Saya"
     }
@@ -238,8 +250,9 @@ export default function RecruitmentPortal() {
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar 
-        user={mockUser} 
+        user={currentView !== "login" ? mockUser : undefined} 
         onNavigate={handleNavigate}
+        onLogout={handleLogout}
         activeSection={currentView}
       />
 
@@ -249,7 +262,7 @@ export default function RecruitmentPortal() {
             {/* Page Header */}
             <div className="max-w-6xl mx-auto mb-6">
               <div className="flex items-center gap-4">
-                {currentView !== "profil" && (
+                {currentView !== "profil" && currentView !== "login" && (
                   <Button
                     variant="ghost"
                     size="icon"
@@ -269,8 +282,8 @@ export default function RecruitmentPortal() {
             {/* Content Area */}
             <div className="max-w-6xl mx-auto">
               <div className="flex flex-col lg:flex-row gap-6">
-                {/* Sidebar - Desktop (hidden on karir view) */}
-                {currentView !== "karir" && (
+                {/* Sidebar - Desktop (hidden on karir, login, reset-password views) */}
+                {currentView !== "karir" && currentView !== "login" && currentView !== "reset-password" && (
                   <aside className="hidden lg:block w-64 flex-shrink-0">
                     <ContentCard className="p-4 sticky top-24">
                       <nav className="space-y-1">
@@ -297,8 +310,8 @@ export default function RecruitmentPortal() {
                   </aside>
                 )}
 
-                {/* Mobile Tab Navigation (hidden on karir view) */}
-                {currentView !== "karir" && (
+                {/* Mobile Tab Navigation (hidden on karir, login, reset-password views) */}
+                {currentView !== "karir" && currentView !== "login" && currentView !== "reset-password" && (
                   <div className="lg:hidden flex gap-2 mb-4">
                     <Button
                       variant={currentView === "profil" ? "default" : "outline"}
@@ -361,6 +374,21 @@ export default function RecruitmentPortal() {
                     {currentView === "karir" && (
                       <CareerSection jobs={mockJobs} userName={mockUser.name} />
                     )}
+
+                    {currentView === "login" && (
+                      <LoginSection 
+                        onLogin={() => handleNavigate("profil")}
+                        onForgotPassword={() => handleNavigate("reset-password")}
+                        onRegister={() => handleNavigate("profil")}
+                      />
+                    )}
+
+                    {currentView === "reset-password" && (
+                      <ResetPasswordSection 
+                        onBack={() => handleNavigate("login")}
+                        onSubmit={() => handleNavigate("login")}
+                      />
+                    )}
                   </ContentCard>
                 </div>
               </div>
@@ -370,7 +398,9 @@ export default function RecruitmentPortal() {
       </main>
 
       <Footer />
-      <FloatingCTA />
+      {currentView !== "login" && currentView !== "reset-password" && (
+        <FloatingCTA onNavigate={handleNavigate} />
+      )}
     </div>
   )
 }
