@@ -1,3 +1,5 @@
+import Image from "next/image"
+
 // Mock user data
 const mockUser = {
   name: "CRISTIANO RONALDO",
